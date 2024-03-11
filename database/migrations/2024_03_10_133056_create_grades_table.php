@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('news_id')->references('id')->on('news');
+            $table->foreignId('user_id')->references('id')->on('users');
+            $table->boolean('like')->default(false);
+            $table->boolean('dislike')->default(false);
             $table->timestamps();
         });
     }
