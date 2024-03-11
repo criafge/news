@@ -4,12 +4,17 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use App\Models\News;
+use App\Models\User;
 
 class IndexController extends Controller
 {
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        return view('admin', ['categories' => Category::all()]);
+        $newses = News::paginate(4);
+        foreach($newses as $news){
+            $news->category_name = $news->category->title;
+        }
+        return view('admin', ['categories' => Category::all(), 'newses' => $newses, 'users' => User::where('role', 'user')->paginate(4)]);
     }
 }

@@ -15,5 +15,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['namespace' => 'App\Http\Controllers\admin', 'middleware' => 'admin'], function () {
     Route::get('admin', 'IndexController')->name('admin');
     Route::resource('news', 'NewsController')->except('index', 'create');
+    Route::get('change/limit/{news}', 'NewsController@changeLimit')->name('change-limit');
+    Route::get('block/{user}', 'ChangeUserLimitController')->name('change-user-limit'); //почему то не работает
+
+    Route::get('news/{news}', 'NewsController@show')->withoutMiddleware([Admin::class]);
 });
-Route::get('news/{news}', 'NewsController@show')->withoutMiddleware([Admin::class]);
+

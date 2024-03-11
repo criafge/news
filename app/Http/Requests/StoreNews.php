@@ -31,7 +31,9 @@ class StoreNews extends FormRequest
     public function messages(): array
     {
         return [
-
+            'title.required' => 'Заполните поле',
+            'content.required' => 'Заполните поле',
+            'category_id.required' => 'Заполните поле',
         ];
     }
 }

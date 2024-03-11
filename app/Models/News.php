@@ -13,4 +13,8 @@ class News extends Model
         'category_id',
         'is_blocked'
     ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

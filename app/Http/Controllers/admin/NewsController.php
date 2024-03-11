@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNews;
 use App\Http\Requests\UpdateNews;
+use App\Models\Category;
 use App\Models\News;
 
 class NewsController extends Controller
@@ -31,7 +32,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        return view('update-news', ['news' => $news]);
+        return view('edit-news-form', ['news' => $news, 'categories' => Category::all()]);
     }
 
     /**
@@ -50,5 +51,14 @@ class NewsController extends Controller
     {
         $news->delete();
         return redirect()->back()->with('success', 'Новость удалена');
+    }
+
+    public function changeLimit(News $news){
+        if($news->is_blocked === 0){
+            $news->update(['is_blocked' => true]);
+        }else{
+            $news->update(['is_blocked' => false]);
+        }
+        return redirect()->back()->with('success', 'Статус изменён!');
     }
 }

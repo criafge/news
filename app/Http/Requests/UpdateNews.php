@@ -22,14 +22,18 @@ class UpdateNews extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required',
         ];
     }
 
     public function messages(): array
     {
         return [
-            //
+            'title.required' => 'Заполните поле',
+            'content.required' => 'Заполните поле',
+            'category_id.required' => 'Заполните поле',
         ];
     }
 }
