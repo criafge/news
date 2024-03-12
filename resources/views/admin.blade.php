@@ -95,10 +95,10 @@
                             <h5 class="card-title">{{ $user->name }}</h5>
                             <h5 class="card-title">{{ $user->email }}</h5>
                             @if ($user->is_blocked === 0)
-                                <a href="{{ route('change-user-limit', $user->id) }}"
+                                <a href="{{ route('block', $user->id) }}"
                                     class="btn btn-outline-danger">Заблокировать</a>
                             @else
-                                <a href="{{ route('change-user-limit', $user->id) }}"
+                                <a href="{{ route('block', $user->id) }}"
                                     class="btn btn-outline-success">Разблокировать</a>
                             @endif
                         </div>
