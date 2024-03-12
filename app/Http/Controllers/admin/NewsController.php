@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNews;
 use App\Http\Requests\UpdateNews;
 use App\Models\Category;
+use App\Models\Grade;
 use App\Models\News;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -24,7 +26,13 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return view('news', ['news' => $news]);
+        $comments = $news->comments;
+        foreach($comments as $comment){
+            $comment->user_name = $comment->user->name;
+        }
+        $grades = Auth::user() ? Grade::where('user_id', Auth::user()->id)->where('news_id', $news->id)->first() : null;
+
+        return view('news', ['news' => $news, 'comments' => $news->comments, 'grade' => $grades]);
     }
 
     /**

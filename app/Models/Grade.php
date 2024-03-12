@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'news_id',
+        'user_id',
+        'like',
+        'dislike'
+    ];
 }
